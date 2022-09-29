@@ -1,9 +1,61 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { PropTypes } from 'prop-types';
+import { SAVE_PASSWORD, SAVE_EMAIL } from '../redux/actions';
 
 class Login extends React.Component {
+  state = {
+    email: '',
+    password: '',
+  };
+
+  handleChange = ({ target }) => {
+    const { name, value } = target;
+    this.setState({ [name]: value });
+  };
+
+  handleClick = () => {
+    const { dispatch, history } = this.props;
+    const { email, password } = this.props;
+    dispatch({ type: SAVE_EMAIL, payload: email });
+    dispatch({ type: SAVE_PASSWORD, payload: password });
+    history.push('/carteira');
+  };
+
   render() {
-    return <div>Login</div>;
+    const { email, password } = this.state;
+    return (
+      <div>
+        <form>
+          <input
+            type="email"
+            name="email"
+            data-testid="email-input"
+            onChange={ this.handleChange }
+            value={ email }
+          />
+          <input
+            type="password"
+            name="password"
+            data-testid="password-input"
+            onChange={ this.handleChange }
+            value={ password }
+          />
+        </form>
+        <button
+          type="button"
+          onClick={ this.handleClick }
+          disabled={ !(email.includes('@') && password.length > 5) }
+        >
+          Entrar
+        </button>
+      </div>
+    );
   }
 }
 
-export default Login;
+Login.propTypes = {
+  dispatch: PropTypes.func,
+}.isRequired;
+
+export default connect()(Login);
