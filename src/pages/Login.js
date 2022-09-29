@@ -24,6 +24,7 @@ class Login extends React.Component {
 
   render() {
     const { email, password } = this.state;
+    const MIN_PASS_LEN = 5;
     return (
       <div>
         <form>
@@ -45,7 +46,7 @@ class Login extends React.Component {
         <button
           type="button"
           onClick={ this.handleClick }
-          disabled={ !(email.includes('@') && password.length > 5) }
+          disabled={ !(email.includes('@') && password.length > MIN_PASS_LEN) }
         >
           Entrar
         </button>
