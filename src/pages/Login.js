@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 // import { SAVE_PASSWORD, SAVE_EMAIL } from '../redux/actions';
-import { saveEmailAction, savePasswordAction } from '../redux/actions';
+import { saveEmailAction } from '../redux/actions';
 
 class Login extends React.Component {
   state = {
@@ -17,11 +17,11 @@ class Login extends React.Component {
 
   handleClick = () => {
     const { dispatch, history } = this.props;
-    const { email, password } = this.state;
+    const { email } = this.state;
     // dispatch({ type: SAVE_EMAIL, payload: email });
     // dispatch({ type: SAVE_PASSWORD, payload: password });
     dispatch(saveEmailAction(email));
-    dispatch(savePasswordAction(password));
+    // dispatch(savePasswordAction(password));
     history.push('/carteira');
   };
 

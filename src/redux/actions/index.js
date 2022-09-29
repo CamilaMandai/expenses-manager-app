@@ -11,3 +11,26 @@ export const savePasswordAction = (password) => ({
   type: SAVE_PASSWORD,
   payload: password,
 });
+
+// Actions assincronas
+
+export const REQUEST_CURRENCY = 'REQUEST_CURRENCY';
+export const GET_CURRENCY = 'GET_CURRENCY';
+
+export const requestAPI = () => ({ type: REQUEST_CURRENCY });
+
+export const getAPI = (data) => ({ type: GET_CURRENCY, payload: data });
+
+export function fetchAPI() {
+  // Desenvolva aqui o código da action assíncrona
+  return async (dispatch) => {
+    dispatch(requestAPI());
+    const req = await fetch('https://economia.awesomeapi.com.br/json/all');
+    const res = await req.json();
+    const data = Object.keys(res).map((key) => res[key]);
+    // const dataMap = data.map((element) => element.code);
+    const dataFilter = data.filter((element) => element.codein !== 'BRLT');
+    const dataMap = dataFilter.map((element) => element.code);
+    return dispatch(getAPI(dataMap));
+  };
+}
