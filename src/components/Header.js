@@ -28,14 +28,14 @@ class Header extends Component {
     // let rmLeadingZero = total.toFixed(2);
     // if (rmLeadingZero.toString()[0] === '0' && total !== 0) {
     //   rmLeadingZero = rmLeadingZero.slice(-(rmLeadingZero.length - 1));
-    const totalLocal = Math.round((total + Number.EPSILON) * 100) / 100;
+    // const totalLocal = Math.round((total + Number.EPSILON) * 100) / 100;
     // }
     return (
       <div>
         <p data-testid="email-field">{email}</p>
         {/* <p data-testid="total-field">0</p> */}
         <p data-testid="header-currency-field">BRL</p>
-        <p data-testid="total-field">{totalLocal}</p>
+        <p data-testid="total-field">{total.toFixed(2)}</p>
       </div>
     );
   }
