@@ -8,11 +8,27 @@ class Login extends React.Component {
   state = {
     email: '',
     password: '',
+    disabledBtn: true,
+  };
+
+  // Solucao retirada da mentoria Summer com a Danielle Gazarine e a Hellen Ribas no dia 29 de setembro
+  checkDisableBtn = () => {
+    const { email, password } = this.state;
+    const MIN_PASS_LEN = 5;
+    const regex = /\S+@\S+\.\S+/;
+    const verifyEmail = email && regex.test(email);
+    const verifyPass = password.length > MIN_PASS_LEN;
+    this.setState({ disabledBtn: !(verifyEmail && verifyPass) });
+    // if (email.includes('@') && password.length > MIN_PASS_LEN) {
+    // this.setState({ disabledBtn: false });
+    // } else {
+    // this.setState({ disabledBtn: true });
+    // }
   };
 
   handleChange = ({ target }) => {
     const { name, value } = target;
-    this.setState({ [name]: value });
+    this.setState({ [name]: value }, () => this.checkDisableBtn());
   };
 
   handleClick = () => {
@@ -26,8 +42,7 @@ class Login extends React.Component {
   };
 
   render() {
-    const { email, password } = this.state;
-    const MIN_PASS_LEN = 5;
+    const { email, password, disabledBtn } = this.state;
     return (
       <div>
         <form>
@@ -49,7 +64,8 @@ class Login extends React.Component {
         <button
           type="button"
           onClick={ this.handleClick }
-          disabled={ !(email.includes('@') && password.length > MIN_PASS_LEN) }
+          // disabled={ !(email.includes('@') && password.length > MIN_PASS_LEN) }
+          disabled={ disabledBtn }
         >
           Entrar
         </button>
