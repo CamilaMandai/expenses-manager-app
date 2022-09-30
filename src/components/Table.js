@@ -10,19 +10,21 @@ class Table extends Component {
         <h3>Table</h3>
         <table role="table">
           <thead>
-            <th>Descrição</th>
-            <th>Tag</th>
-            <th>Método de pagamento</th>
-            <th>Valor</th>
-            <th>Moeda</th>
-            <th>Câmbio utilizado</th>
-            <th>Valor convertido</th>
-            <th>Moeda de conversão</th>
-            <th>Editar/Excluir</th>
+            <tr>
+              <th>Descrição</th>
+              <th>Tag</th>
+              <th>Método de pagamento</th>
+              <th>Valor</th>
+              <th>Moeda</th>
+              <th>Câmbio utilizado</th>
+              <th>Valor convertido</th>
+              <th>Moeda de conversão</th>
+              <th>Editar/Excluir</th>
+            </tr>
           </thead>
           <tbody>
             {expenses.map((element) => (
-              <tr key={ element.id }>
+              <tr key={element.id}>
                 <td>{element.description}</td>
                 <td>{element.tag}</td>
                 <td>{element.method}</td>
