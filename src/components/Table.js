@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
-import { deleteExpense } from '../redux/actions';
+import { deleteExpense, EDIT_EXPENSE } from '../redux/actions';
 
 class Table extends Component {
   rmExpense = (expense) => {
@@ -11,6 +11,14 @@ class Table extends Component {
     const convertedValue = changeRate * Number(expense.value);
     const updatedTotal = expenses.length === 1 ? 0 : total - convertedValue;
     dispatch(deleteExpense({ updatedExpenses, updatedTotal }));
+  };
+
+  edit = (index) => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: EDIT_EXPENSE,
+      payload: index,
+    });
   };
 
   render() {
@@ -33,7 +41,7 @@ class Table extends Component {
             </tr>
           </thead>
           <tbody>
-            {expenses.map((element) => (
+            {expenses.map((element, index) => (
               <tr key={ element.id }>
                 <td>{element.description}</td>
                 <td>{element.tag}</td>
@@ -56,6 +64,13 @@ class Table extends Component {
                     onClick={ () => this.rmExpense(element) }
                   >
                     Excluir
+                  </button>
+                  <button
+                    type="button"
+                    data-testid="edit-btn"
+                    onClick={ () => this.edit(index) }
+                  >
+                    Editar
                   </button>
                 </td>
               </tr>

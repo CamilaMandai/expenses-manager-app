@@ -1,4 +1,4 @@
-import { DELETE_EXPENSE, GET_CURRENCY,
+import { DELETE_EXPENSE, EDIT_EXPENSE, GET_CURRENCY,
   REQUEST_CURRENCY,
   SAVE_EMAIL,
   SAVE_EXPENSES,
@@ -18,6 +18,10 @@ const INITIAL_STATE = {
     rawCurrencies: [],
   },
   total: 0,
+  edit: {
+    isEditing: false,
+    index: -1,
+  },
 };
 
 const walletReducer = (state = INITIAL_STATE, action) => {
@@ -30,14 +34,6 @@ const walletReducer = (state = INITIAL_STATE, action) => {
         loading: true,
       },
     };
-  // case GET_CURRENCY:
-  //   return {
-  //     ...state,
-  //     wallet: { ...state.wallet,
-  //       currencies: action.payload,
-  //       loading: false,
-  //     },
-  //   };
   case GET_CURRENCY:
     return {
       ...state,
@@ -67,6 +63,14 @@ const walletReducer = (state = INITIAL_STATE, action) => {
         expenses: action.payload.updatedExpenses,
       },
       total: action.payload.updatedTotal,
+    };
+  case EDIT_EXPENSE:
+    return {
+      ...state,
+      edit: {
+        isEditing: !state.edit.isEditing,
+        index: action.payload,
+      },
     };
   default:
     return state;

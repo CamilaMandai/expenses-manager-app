@@ -41,6 +41,7 @@ export function fetchAPI() {
 
 export const SAVE_EXPENSES = 'SAVE_EXPENSES';
 export const DELETE_EXPENSE = 'DELETE_EXPENSE';
+export const EDIT_EXPENSE = 'EDIT_EXPENSE';
 // export const GET_TOTAL = 'GET_TOTAL';
 
 // export const getTotal = (array) => ({
