@@ -6,6 +6,7 @@ import { applyMiddleware, createStore } from 'redux';
 import { render } from '@testing-library/react';
 import thunk from 'redux-thunk';
 import reducer from '../../redux/reducers/index';
+import mockData from './mockData';
 
 function withRouter(component, history) {
   return (
@@ -43,12 +44,12 @@ export function renderWithRedux(component, options = {}) {
         email: 'user@gmail.com', // string que armazena o email da pessoa usuária
       },
       wallet: {
-        currencies: [], // array de string
+        currencies: ['USD', 'CAD'], // array de string
         expenses: [], // array de objetos, com cada objeto tendo as chaves id, value, currency, method, tag, description e exchangeRates
         editor: false, // valor booleano que indica de uma despesa está sendo editada
         idToEdit: 0, // valor numérico que armazena o id da despesa que esta sendo editada
         loading: null,
-        rawCurrencies: [],
+        rawCurrencies: mockData,
       },
       total: 0,
     },
