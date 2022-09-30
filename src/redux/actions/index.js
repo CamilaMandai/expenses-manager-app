@@ -16,6 +16,7 @@ export const savePasswordAction = (password) => ({
 
 export const REQUEST_CURRENCY = 'REQUEST_CURRENCY';
 export const GET_CURRENCY = 'GET_CURRENCY';
+export const GET_RAW_CURRENCY = 'GET_RAW_CURRENCY';
 
 export const requestAPI = () => ({ type: REQUEST_CURRENCY });
 
@@ -31,6 +32,22 @@ export function fetchAPI() {
     // const dataMap = data.map((element) => element.code);
     const dataFilter = data.filter((element) => element.codein !== 'BRLT');
     const dataMap = dataFilter.map((element) => element.code);
-    return dispatch(getAPI(dataMap));
+    // return dispatch(getAPI(dataMap));
+    return dispatch(getAPI({ filtered: dataMap, raw: res }));
   };
 }
+
+// actions de salvar expenses
+
+export const SAVE_EXPENSES = 'SAVE_EXPENSES';
+// export const GET_TOTAL = 'GET_TOTAL';
+
+// export const getTotal = (array) => ({
+//   type: GET_TOTAL,
+//   payload: array.reduce((acc, curr) => acc + curr, 0),
+// });
+
+export const saveExpenses = (array) => ({
+  type: SAVE_EXPENSES,
+  payload: array,
+});
