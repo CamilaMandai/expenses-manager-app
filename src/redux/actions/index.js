@@ -40,6 +40,7 @@ export function fetchAPI() {
 // actions de salvar expenses
 
 export const SAVE_EXPENSES = 'SAVE_EXPENSES';
+export const DELETE_EXPENSE = 'DELETE_EXPENSE';
 // export const GET_TOTAL = 'GET_TOTAL';
 
 // export const getTotal = (array) => ({
@@ -50,4 +51,9 @@ export const SAVE_EXPENSES = 'SAVE_EXPENSES';
 export const saveExpenses = (array) => ({
   type: SAVE_EXPENSES,
   payload: array,
+});
+
+export const deleteExpense = (expense) => ({
+  type: DELETE_EXPENSE,
+  payload: expense,
 });

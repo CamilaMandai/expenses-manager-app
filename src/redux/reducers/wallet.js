@@ -1,4 +1,4 @@
-import { GET_CURRENCY,
+import { DELETE_EXPENSE, GET_CURRENCY,
   REQUEST_CURRENCY,
   SAVE_EMAIL,
   SAVE_EXPENSES,
@@ -60,12 +60,14 @@ const walletReducer = (state = INITIAL_STATE, action) => {
       },
       total: Number(state.total) + Number(action.payload[1]),
     };
-  // case GET_TOTAL:
-  //   return {
-  //     ...state,
-  //     total: action.payload,
-  //     // state.wallet.expenses.reduce((acc, curr) => acc + curr.convertedToReal, 0)
-  //   };
+  case DELETE_EXPENSE:
+    return {
+      ...state,
+      wallet: { ...state.wallet,
+        expenses: action.payload.updatedExpenses,
+      },
+      total: action.payload.updatedTotal,
+    };
   default:
     return state;
   }
