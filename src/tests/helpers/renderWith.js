@@ -7,6 +7,7 @@ import { render } from '@testing-library/react';
 import thunk from 'redux-thunk';
 import reducer from '../../redux/reducers/index';
 import mockData from './mockData';
+import store from '../../redux/store';
 
 function withRouter(component, history) {
   return (
@@ -16,9 +17,9 @@ function withRouter(component, history) {
   );
 }
 
-function withRedux(component, store) {
+function withRedux(component, store1 = store) {
   return (
-    <Provider store={ store }>
+    <Provider store={ store1 }>
       { component }
     </Provider>
   );
@@ -52,13 +53,17 @@ export function renderWithRedux(component, options = {}) {
         rawCurrencies: mockData,
       },
       total: 0,
+      edit: {
+        isEditing: false,
+        index: -1,
+      },
     },
-    store = createStore(reducer, initialState, applyMiddleware(thunk)),
+    store1 = createStore(reducer, initialState, applyMiddleware(thunk)),
   } = options;
 
   return {
-    ...render(withRedux(component, store)),
-    store,
+    ...render(withRedux(component, store1)),
+    store1,
   };
 }
 
@@ -73,3 +78,20 @@ export function renderWithRouterAndRedux(component, options = {}) {
     history,
   };
 }
+
+// export const renderWithRouterAndRedux = (component, {
+//   initialState = {},
+//   store = createStore(reducer, initialState, applyMiddleware(thunk)),
+//   initialEntries = ['/'],
+//   history = createMemoryHistory({ initialEntries }),
+// } = {}) => ({
+//   ...render(
+//     <Router history={ history }>
+//       <Provider store={ store }>
+//         {component}
+//       </Provider>
+//     </Router>
+//   ),
+//   history,
+//   store,
+// });

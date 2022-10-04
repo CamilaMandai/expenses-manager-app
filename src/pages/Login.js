@@ -60,6 +60,7 @@ class Login extends React.Component {
             onChange={ this.handleChange }
             value={ password }
           />
+          {/* <input type="submit" disabled={ disabledBtn } value="Entrar"/> */}
         </form>
         <button
           type="button"

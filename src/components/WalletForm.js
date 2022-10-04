@@ -52,9 +52,9 @@ class WalletForm extends Component {
       exchangeRates: { ...rawCurrencies },
       // convertedToReal,
     };
+    this.setState({ value: '', description: '' });
     await dispatch(saveExpenses([expensesLocal, convertedToReal]));
     // dispatch(getTotal(expenses.map((element) => element.convertedToReal)));
-    this.setState({ value: '', description: '' });
   };
 
   handleEdit = () => {

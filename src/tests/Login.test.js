@@ -1,89 +1,66 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-
+// import { Provider } from 'react-redux';
+// import { Router } from 'react-router-dom';
+// import { createMemoryHistory } from 'history';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
-import Login from '../pages/Login';
-import Wallet from '../pages/Wallet';
-import Table from '../components/Table';
-import WalletForm from '../components/WalletForm';
+import App from '../App';
+// import store from '../redux/store';
+
+// function renderWithRouter(component) {
+//   const history = createMemoryHistory();
+//   const obj = render(
+//     <Router history={ history }>
+//       {component}
+//     </Router>,
+//   );
+//   return ({ history, ...obj });
+// }
+
+// // export default renderWithRouter;
+const emailInputStr = 'email-input';
+const passwordInputStr = 'password-input';
 
 describe('Teste da página de Login', () => {
   it('1- verifica campo de input de email', () => {
-    renderWithRouterAndRedux(<Login />);
-    const emailInput = screen.getByTestId('email-input');
+    renderWithRouterAndRedux(<App />);
+    const emailInput = screen.getByTestId(emailInputStr);
     expect(emailInput).toBeDefined();
   });
   it('2- verifica campo de input de Senha', () => {
-    renderWithRouterAndRedux(<Login />);
-    const passwordInput = screen.getByTestId('password-input');
+    renderWithRouterAndRedux(<App />);
+    const passwordInput = screen.getByTestId(passwordInputStr);
     expect(passwordInput).toBeDefined();
   });
-  it('3- verifica o botão de "Entrar"', () => {
-    renderWithRouterAndRedux(<Login />);
+  it('3- verifica o botão de "Entrar" e se ele está desabilitado', () => {
+    renderWithRouterAndRedux(<App />);
     const btn = screen.getByText(/entrar/i);
     expect(btn).toBeDefined();
+    expect(btn).toBeDisabled();
   });
-  it('4- verifica se é possível digitar nos campos de input', () => {
-    renderWithRouterAndRedux(<Login />, ['/']);
-    const emailInput = screen.getByTestId('email-input');
-    const passwordInput = screen.getByTestId('password-input');
+  it('4- verifica se é possível digitar nos campos de input e habilitar o botão', () => {
+    renderWithRouterAndRedux(<App />);
+    const emailInput = screen.getByTestId(emailInputStr);
+    const passwordInput = screen.getByTestId(passwordInputStr);
     userEvent.type(emailInput, 'user@gmail.com');
     userEvent.type(passwordInput, '512847');
-    // const btn = screen.getByText(/entrar/i);
-    // userEvent.click(btn);
-    // expect(history.location.pathname).toBe('/carteira');
-    // const emailHeader = screen.getByTestId('email-field');
-    // expect(emailHeader).toBeDefined();
-    // // console.log(history);
-    // history.history.push("/carteira");
-    // const emailHeader = screen.getByTestId('email-field');
-    // expect(emailHeader).toBeDefined();
+    const btn = screen.getByText(/entrar/i);
+    expect(btn).not.toBeDisabled();
   });
-});
+  it('5 - verifica se ao clicar no botão a página é redirecionada para /carteira', () => {
+    const { history } = renderWithRouterAndRedux(<App />);
 
-describe('Teste da página da rota /carteira', () => {
-  it('5- verifica se existe um header com o email do user', () => {
-    renderWithRouterAndRedux(<Wallet />, ['/carteira']);
+    const emailInput = screen.getByTestId(emailInputStr);
+    const passwordInput = screen.getByTestId(passwordInputStr);
+    userEvent.type(emailInput, 'user@gmail.com');
+    userEvent.type(passwordInput, '512847');
+    const btn = screen.getByText(/entrar/i);
+    userEvent.click(btn);
+    expect(history.location.pathname).toBe('/carteira');
     const emailHeader = screen.getByTestId('email-field');
-    const totalField = screen.getByTestId('total-field');
     expect(emailHeader).toBeDefined();
-    expect(totalField.innerHTML).toBe('0');
-  });
-  it('6- verifica se WalletForm é renderizado certinho', () => {
-    renderWithRouterAndRedux(<Wallet />, ['/carteira']);
-    const inputValue = screen.getByTestId('value-input');
-    const descriptionInput = screen.getByTestId('description-input');
-    const currencyInput = screen.getByTestId('currency-input');
-    const methodInput = screen.getByTestId('method-input');
-    const tagInput = screen.getByTestId('tag-input');
-    const btn = screen.getByRole('button');
-    expect(inputValue).toBeDefined();
-    expect(descriptionInput).toBeDefined();
-    expect(currencyInput).toBeDefined();
-    expect(methodInput).toBeDefined();
-    expect(tagInput).toBeDefined();
-    expect(btn).toBeDefined();
-  });
-  it('7- verifica se em WalletForm é possível digitar em campos de input', () => {
-    renderWithRouterAndRedux(<WalletForm />);
-    const inputValue = screen.getByTestId('value-input');
-    const descriptionInput = screen.getByTestId('description-input');
-    userEvent.type(descriptionInput, 'Almoço');
-    userEvent.type(inputValue, '123');
-  });
-  it('8- verifica se em WalletForm tem campos do tipo select', () => {
-    renderWithRouterAndRedux(<WalletForm />);
-    const currencyInput = screen.getByRole('option', { name: 'Alimentação' });
-    expect(currencyInput).toBeDefined();
-  });
-});
-
-describe('Teste do componente Table', () => {
-  it('9- verifica se Table é renderizado certinho', () => {
-    renderWithRouterAndRedux(<Table />);
-    const titleElement = screen.getByText('Table');
-    const tableElement = screen.getByRole('table');
-    expect(titleElement).toBeDefined();
-    expect(tableElement).toBeDefined();
+    // const emailHeader = screen.getByTestId('email-field');
+    // expect(emailHeader).toBeDefined();
+    // console.log(history);
   });
 });

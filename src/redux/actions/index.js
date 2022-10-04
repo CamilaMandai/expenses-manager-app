@@ -17,23 +17,43 @@ export const savePasswordAction = (password) => ({
 export const REQUEST_CURRENCY = 'REQUEST_CURRENCY';
 export const GET_CURRENCY = 'GET_CURRENCY';
 export const GET_RAW_CURRENCY = 'GET_RAW_CURRENCY';
+export const FAILED_REQUEST = 'FAILED_REQUEST';
 
 export const requestAPI = () => ({ type: REQUEST_CURRENCY });
 
 export const getAPI = (data) => ({ type: GET_CURRENCY, payload: data });
 
+function failedRequest(error) {
+  return { type: FAILED_REQUEST, payload: error };
+}
+
+// export function fetchAPI() {
+//   // Desenvolva aqui o código da action assíncrona
+//   return async (dispatch) => {
+//     dispatch(requestAPI());
+//     const req = await fetch('https://economia.awesomeapi.com.br/json/all');
+//     const res = await req.json();
+//     const data = Object.keys(res).map((key) => res[key]);
+//     // const dataMap = data.map((element) => element.code);
+//     const dataFilter = data.filter((element) => element.codein !== 'BRLT');
+//     const dataMap = dataFilter.map((element) => element.code);
+//     // return dispatch(getAPI(dataMap));
+//     return dispatch(getAPI({ filtered: dataMap, raw: res }));
+//   };
+// }
+
 export function fetchAPI() {
-  // Desenvolva aqui o código da action assíncrona
-  return async (dispatch) => {
+  return (dispatch) => {
     dispatch(requestAPI());
-    const req = await fetch('https://economia.awesomeapi.com.br/json/all');
-    const res = await req.json();
-    const data = Object.keys(res).map((key) => res[key]);
-    // const dataMap = data.map((element) => element.code);
-    const dataFilter = data.filter((element) => element.codein !== 'BRLT');
-    const dataMap = dataFilter.map((element) => element.code);
-    // return dispatch(getAPI(dataMap));
-    return dispatch(getAPI({ filtered: dataMap, raw: res }));
+    return fetch('https://economia.awesomeapi.com.br/json/all')
+      .then((response) => response.json())
+      .then((res) => {
+        const data = Object.keys(res).map((key) => res[key]);
+        const dataFilter = data.filter((element) => element.codein !== 'BRLT');
+        const dataMap = dataFilter.map((element) => element.code);
+        return dispatch(getAPI({ filtered: dataMap, raw: res }));
+      })
+      .catch((error) => dispatch(failedRequest(error)));
   };
 }
 
