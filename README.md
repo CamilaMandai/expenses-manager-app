@@ -1,4 +1,4 @@
-Neste projeto desenvolvi uma aplicação de registro de gastos em diferentes moedas com campos de descrição, valor, forma de pagamento e categoria de gasto (alimentação, trabalho, lazer, ...). Ao inserir os gastos, é renderizado o valor total convertido para real e as informações são renderizadas em uma tabela e os valores também convertidos para real. A aplicação tambpem conta com uma tela de login que redireciona para a aplicação em si.
+Neste projeto desenvolvi uma aplicação de registro de gastos em diferentes moedas com campos de descrição, valor, forma de pagamento e categoria de gasto (alimentação, trabalho, lazer, ...). Ao inserir os gastos, é renderizado o valor total convertido para real e as informações são renderizadas em uma tabela e os valores também convertidos para real. A aplicação também conta com uma tela de login que redireciona para a página de inserção de gastos.
 
 Assim, na aplicação, o usuário pode:
 
