@@ -27,21 +27,6 @@ function failedRequest(error) {
   return { type: FAILED_REQUEST, payload: error };
 }
 
-// export function fetchAPI() {
-//   // Desenvolva aqui o código da action assíncrona
-//   return async (dispatch) => {
-//     dispatch(requestAPI());
-//     const req = await fetch('https://economia.awesomeapi.com.br/json/all');
-//     const res = await req.json();
-//     const data = Object.keys(res).map((key) => res[key]);
-//     // const dataMap = data.map((element) => element.code);
-//     const dataFilter = data.filter((element) => element.codein !== 'BRLT');
-//     const dataMap = dataFilter.map((element) => element.code);
-//     // return dispatch(getAPI(dataMap));
-//     return dispatch(getAPI({ filtered: dataMap, raw: res }));
-//   };
-// }
-
 export function fetchAPI() {
   return (dispatch) => {
     dispatch(requestAPI());

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { fetchAPI, saveExpenses, deleteExpense, EDIT_EXPENSE } from '../redux/actions';
-// import secondaryFetchAPI from '../services/fetchApi';
 
 class WalletForm extends Component {
   state = {
@@ -17,15 +16,6 @@ class WalletForm extends Component {
     const { dispatch } = this.props;
     dispatch(fetchAPI());
   }
-
-  // calculateTotal = () => {
-  //   const { expenses } = this.props;
-  //   const rateChange = expenses.map(
-  //     (element) => Number(element.exchangeRates[element.currency].ask),
-  //   );
-  //   console.log(rateChange);
-  // // const valoresReais = expenses.map((element, index) => element.value * rateChange[index]);
-  // };
 
   handleChange = ({ target }) => {
     const { name, value } = target;

@@ -11,7 +11,6 @@ class Login extends React.Component {
     disabledBtn: true,
   };
 
-  // Solucao retirada da mentoria Summer com a Danielle Gazarine e a Hellen Ribas no dia 29 de setembro
   checkDisableBtn = () => {
     const { email, password } = this.state;
     const MIN_PASS_LEN = 5;
@@ -19,11 +18,6 @@ class Login extends React.Component {
     const verifyEmail = email && regex.test(email);
     const verifyPass = password.length > MIN_PASS_LEN;
     this.setState({ disabledBtn: !(verifyEmail && verifyPass) });
-    // if (email.includes('@') && password.length > MIN_PASS_LEN) {
-    // this.setState({ disabledBtn: false });
-    // } else {
-    // this.setState({ disabledBtn: true });
-    // }
   };
 
   handleChange = ({ target }) => {
@@ -34,10 +28,7 @@ class Login extends React.Component {
   handleClick = () => {
     const { dispatch, history } = this.props;
     const { email } = this.state;
-    // dispatch({ type: SAVE_EMAIL, payload: email });
-    // dispatch({ type: SAVE_PASSWORD, payload: password });
     dispatch(saveEmailAction(email));
-    // dispatch(savePasswordAction(password));
     history.push('/carteira');
   };
 
