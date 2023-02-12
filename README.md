@@ -13,5 +13,5 @@ A aplicação é um projeto React no contexto de:
 - Dispatchers no Redux 
 - Conexão do Redux aos componentes React
 
-Para testar a aplicação, dê o comando **npm install** para instalar as dependências.
+Para testar a aplicação, dê o comando **npm install** para instalar as dependências e o node deve estar na versão 16.
 
