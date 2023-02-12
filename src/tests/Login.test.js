@@ -1,23 +1,9 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-// import { Provider } from 'react-redux';
-// import { Router } from 'react-router-dom';
-// import { createMemoryHistory } from 'history';
+
 import { renderWithRouterAndRedux } from './helpers/renderWith';
 import App from '../App';
-// import store from '../redux/store';
 
-// function renderWithRouter(component) {
-//   const history = createMemoryHistory();
-//   const obj = render(
-//     <Router history={ history }>
-//       {component}
-//     </Router>,
-//   );
-//   return ({ history, ...obj });
-// }
-
-// // export default renderWithRouter;
 const emailInputStr = 'email-input';
 const passwordInputStr = 'password-input';
 
@@ -59,8 +45,5 @@ describe('Teste da página de Login', () => {
     expect(history.location.pathname).toBe('/carteira');
     const emailHeader = screen.getByTestId('email-field');
     expect(emailHeader).toBeDefined();
-    // const emailHeader = screen.getByTestId('email-field');
-    // expect(emailHeader).toBeDefined();
-    // console.log(history);
   });
 });

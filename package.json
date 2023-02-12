@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "engines": {
-    "node": "16"
+    "node": "18"
   },
   "dependencies": {
     "@redux-devtools/extension": "3.2.2",
@@ -23,7 +23,7 @@
   "scripts": {
     "cy": "env CY_CLI=true cypress run",
     "cy:open": "cypress open --e2e --browser chrome",
-    "start": "env ESLINT_NO_DEV_ERRORS=true react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

@@ -25,13 +25,11 @@ describe('Teste do componente Table', () => {
 
     const inputValue = screen.getByTestId(valueInputStr);
     userEvent.type(inputValue, '10');
-    // const descriptionInput = screen.getByTestId('description-input');
 
     const btn = screen.getByRole('button');
     userEvent.click(btn);
     const valueText = screen.getByText('10.00');
     expect(valueText).toBeDefined();
-    // expect(store1.getState().wallet.expenses[0].value).toBe('10');
     const btnEdit = screen.getByRole('button', {
       name: /editar/i,
     });
@@ -62,15 +60,11 @@ describe('Teste do componente Table', () => {
     const currencyText = screen.getByRole('cell', {
       name: /dólar americano\/real brasileiro/i,
     });
-    // const moedaText = screen.getByRole('cell', {
-    //   name: /Real/i,
-    // });
     expect(descriptionText).toBeDefined();
     expect(valueText).toBeDefined();
     expect(methodText).toBeDefined();
     expect(currencyText).toBeDefined();
     expect(tagText).toBeDefined();
-    // expect(moedaText).toBeDefined();
 
     const btnDelete = screen.getByTestId('delete-btn');
     const btnEdit = screen.getByTestId('edit-btn');
@@ -81,7 +75,6 @@ describe('Teste do componente Table', () => {
     userEvent.click(btnEdit);
     expect(store1.getState().edit.isEditing).toBeFalsy();
     userEvent.click(btnDelete);
-    // console.log(store1.getState().wallet.expenses.length);
     expect(store1.getState().wallet.expenses.length).toBe(0);
     expect(store1.getState().total).toBe(0);
     userEvent.click(btnAdd);
@@ -104,7 +97,6 @@ describe('Teste do componente Table', () => {
     const editBtnForm = screen.getByRole('button', {
       name: /editar despesa/i,
     });
-    // const descriptionInput = screen.getByTestId('description-input');
     userEvent.type(descriptionInput, 'Almoço');
     userEvent.click(editBtnForm);
     expect(store1.getState().wallet.expenses[0].description).toBe('Almoço');
