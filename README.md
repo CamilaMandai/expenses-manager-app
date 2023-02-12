@@ -19,8 +19,12 @@ Para a busca e conversão das moedas, a aplicação consome os dados da API ***a
 
 Documentação da API disponível em : https://docs.awesomeapi.com.br/api-de-moedas
 
+### Testes ###
+
+Foram implementados testes unitários e de integração com cobertura mínima de 90% de cada componente. Para isso utilizei a biblioteca React Testing Library. Para verificar o percentual de cobertura de testes, rode o comando ***npm run test-coverage***
+
+## PARA RODAR A APLICAÇÃO ##
+
 Para rodar a aplicação, dê o comando **npm install** para instalar as dependências e **npm start** para subir a aplicação.
 
-**Testes**
-Foram implementados testes unitários e de integração com cobertura mínima de 90% de cada componente. Para isso utilizei a biblioteca React Testing Library. Para verificar o percentual de cobertura de testes, rode o comando ***npm run test-coverage***
 
